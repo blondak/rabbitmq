@@ -52,9 +52,21 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
+    services:
+      rabbitmq:
+        image: rabbitmq:3.13-alpine
+        ports:
+          - 5672:5672
+        options: >-
+          --health-cmd "rabbitmq-diagnostics -q ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      RABBITMQ_HOST: 127.0.0.1
     strategy:
       matrix:
-        php: [ '8.0', '8.1', '8.2', '8.3' ]
+        php: [ '8.0', '8.1', '8.2', '8.3', '8.4' ]
 
       fail-fast: false
 
@@ -65,8 +77,10 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          ini-values: error_reporting=E_ALL
 
       - run: composer install --no-progress --prefer-dist
+      - run: composer check-platform-reqs
       - run: make tests
 
   code_coverage:

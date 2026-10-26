@@ -30,7 +30,7 @@ final class RabbitMQMessageHelper
 	}
 
 
-	public static function getInstance(array $config = null): self
+	public static function getInstance(?array $config = null): self
 	{
 		if (self::$self === null) {
 			if ($config === null) {
@@ -91,7 +91,7 @@ final class RabbitMQMessageHelper
 	}
 
 
-	public function getQueueMessages(string $queueName = null): array
+	public function getQueueMessages(?string $queueName = null): array
 	{
 		if ($queueName === null) {
 			$messages = $this->queueMessages;

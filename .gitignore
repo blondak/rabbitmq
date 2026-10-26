@@ -6,6 +6,7 @@
 
 # Tests
 /tests/temp
+/tests/tmp
 
 # Composer
 /vendor

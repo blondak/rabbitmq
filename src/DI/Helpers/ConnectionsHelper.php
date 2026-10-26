@@ -28,8 +28,8 @@ final class ConnectionsHelper extends AbstractHelper
 				'persistent' => Expect::bool(false),
 				'tcpNoDelay' => Expect::bool(false),
 				'lazy' => Expect::bool(true),
-				'ssl' => Expect::array(null)->required(false),
-				'heartbeatCallback' => Expect::array(null)->required(false),
+				'ssl' => Expect::anyOf(Expect::array(), null)->default(null),
+				'heartbeatCallback' => Expect::anyOf(Expect::array(), null)->default(null),
 				'publishConfirm' => Expect::anyOf(
 					Expect::bool(),
 					Expect::int(),
