@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Bckp\RabbitMQ\Tests\Cases\DI;
 
 use Bckp\RabbitMQ\Connection\ConnectionFactory;
+use Bckp\RabbitMQ\Connection\ConnectionsDataBag;
 use Bckp\RabbitMQ\DI\RabbitMQExtension;
 use Bckp\RabbitMQ\Tests\Toolkit\NeonLoader;
 use Nette\DI\Compiler;
@@ -40,6 +41,9 @@ final class RabbitMQExtensionTest extends TestCase
 		$container = new $class();
 
 		Assert::type(ConnectionFactory::class, $container->getByType(ConnectionFactory::class));
+		$data = $container->getByType(ConnectionsDataBag::class)->getDataByKey('default');
+		Assert::null($data['ssl']);
+		Assert::null($data['heartbeatCallback']);
 	}
 
 }

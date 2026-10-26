@@ -27,8 +27,23 @@ For details on how to use this package, check out our [documentation](.docs).
 
 | State  | Version   | Branch   | Nette    | PHP     |
 |--------|-----------|----------|----------|---------|
-| dev    | `^11.2.x` | `master` | `3.0+`   | `>=8.0` |
-| stable | `^11.1.1` | `master` | `3.0+`   | `>=8.0` |
+| dev    | `^11.2.x` | `master` | `3.0+`   | `8.0–8.4` |
+| stable | `11.1.6-pl2` | tag   | `3.0+`   | `8.0–8.4` |
+
+### PHP 8.4 compatibility (blondak fork)
+
+The `11.1.6-pl2` release retains the Nette DI 3.0 compatibility of
+`11.1.6-pl1` and adds PHP 8.4 to the supported and tested versions.
+Install this fork through a Composer VCS repository pointing to
+`https://github.com/blondak/rabbitmq`; the Composer package name remains
+`bckp/rabbitmq`.
+
+Run unit tests with `make tests`. To also run integration tests, set
+`RABBITMQ_HOST` to a disposable RabbitMQ broker. Optional settings are
+`RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASSWORD` and `RABBITMQ_VHOST`.
+Defaults are port 5672, guest/guest and vhost `/`. Tests create randomly
+named queues and exchanges and remove them afterwards. CI runs these tests
+against its own RabbitMQ service on PHP 8.0 through 8.4.
 
 ## Development
 
